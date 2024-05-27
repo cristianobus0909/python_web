@@ -2,10 +2,18 @@ bd = {}
 def registro (bd):
     nombre =  input("Ingrese su nombre: ")
     contraseña = input("Ingrese una contraseña segura: ")
-    nuevo_usuario = [nombre, contraseña]
+    edad = input("ingrese su edad")
+    email = input("Ingrese su email")
+    nuevo_usuario = {
+        'nombre': nombre,
+        'contraseña': contraseña,
+        'edad': edad,
+        'email': email
+    }
     if len(bd) == 0:
-        bd['nombre'] = nuevo_usuario[0]
-        bd['contraseña'] = nuevo_usuario[1]
+        bd.update(nuevo_usuario)
+    else:
+        print("Ya existe un usuario registrado.")
     return bd
 
 def leer_data(bd):
@@ -21,7 +29,7 @@ def login(bd):
         contraseña = input("Intente nuevamente ingresando su contraseña: ")
     else:
         print("Bienvenido", nombre)
-
+    return bd
 
 registro(bd)
 leer_data(bd)
