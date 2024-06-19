@@ -1,0 +1,10 @@
+{% extends 'padre.html' %}
+{% block contenidoDinamico %}
+
+    <h1>Lista de Profesores</h1>
+
+    {% for profesor in profesores %}
+        <li>{{profesor.nombre}} {{profesor.apellido}} - {{profesor.profesion}}</li>
+    {% endfor %}
+
+{% endblock contenidoDinamico %}
