@@ -9,7 +9,10 @@ class ProfesorFormulario(forms.Form):
     nombre= forms.CharField(max_length=30)
     apellido= forms.CharField(max_length=30)
     email= forms.EmailField()
-    preofesion= forms.CharField(max_length=30)
+    profesion= forms.CharField(max_length=30)
+class EstudianteFormulario(forms.Form):
+    nombre= forms.CharField(max_length=30)
+    apellido= forms.CharField(max_length=30)
+    email= forms.EmailField()
+    curso= forms.CharField(max_length=30)
 
-class Busqueda(forms.Form):
-    busqueda = forms.ChoiceField()

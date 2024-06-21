@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 from .models import *
 from .forms import *
 
@@ -21,9 +22,11 @@ def cursos_formulario(req):
     return render(req,'curso_formulario.html',{'miFormulario':miFormulario})
 
 def estudiantes(req):
-    return render(req,'estudiantes.html',{})
+    estudiantes = Estudiante.objects.all()
+    return render(req,'estudiantes.html',{'estudiantes':estudiantes})
 def profesores(req):
-    return render(req,'profesores.html',{})
+    profesores = Profesor.objects.all()
+    return render(req, 'profesores.html', {'profesores': profesores})
 def profesor_formulario(req):
     if req.method == "POST":
         miFormulario = ProfesorFormulario(req.POST)
@@ -34,15 +37,26 @@ def profesor_formulario(req):
             return render(req,'index.html',{})
     else:
         miFormulario= ProfesorFormulario()
-    return render(req,'curso_formulario.html',{'miFormulario':miFormulario})
+    return render(req,'profesorFormulario.html',{'miFormulario':miFormulario})
+def estudiante_formulario(req):
+    if req.method == "POST":
+        miFormulario = EstudianteFormulario(req.POST)
+        if miFormulario.is_valid():
+            informacion = miFormulario.cleaned_data
+            estudiante = Estudiante(nombre=informacion['nombre'],apellido=informacion['apellido'],email=informacion['email'],curso=informacion['curso'])
+            estudiante.save()       
+            return render(req,'index.html',{})
+    else:
+        miFormulario= EstudianteFormulario()
+    return render(req,'estudiante_formulario.html',{'miFormulario':miFormulario})
 def busquedaCamada(req):
     return render(req,'busquedaCamada.html',{})
 def buscar(req):
     if  req.GET['camada']:
         camada = req.GET['camada']
-        cursos = Curso.objects.filter(camada_icontains=camada)
+        cursos = Curso.objects.filter(camada__icontains=camada)
 
         return render(req, 'resultadoBusqueda.html',{'cursos':cursos,'camada':camada})
     else:
         respuesta = 'No enviaste datos'
-    return render(req,'buscar.html',{respuesta})
+    return HttpResponse(respuesta)

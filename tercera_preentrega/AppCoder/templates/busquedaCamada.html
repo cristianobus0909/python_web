@@ -1,8 +1,9 @@
 {% extends 'padre.html' %}
 {% block contenidoDinamico %}
 
-<form action="{% url 'BusquedaCamada' %}" method="get">{% csrf_token %}
+<form action="{% url 'Buscar' %}" method="get">{% csrf_token %}
     <p>n° camada:<input type="text"name="camada"></p>
+    <button type="submit">Buscar</button>
 </form>
     
 {% endblock contenidoDinamico %}

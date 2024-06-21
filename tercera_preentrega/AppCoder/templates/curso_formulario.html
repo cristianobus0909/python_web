@@ -3,7 +3,7 @@
 {% block contenidoDinamico %}
     <form action="{% url 'CursoFormulario' %}" method="POST">{% csrf_token %}
 
-    {{miFormulario.as_p}}
+        {{miFormulario.as_p}}
 
         <button type="submit">Crear</button>
     </form>
